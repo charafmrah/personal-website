@@ -1,6 +1,6 @@
 ---
+import Header from "../components/global/Header.astro";
 import BaseHead from "../components/global/BaseHead.astro";
-import Footer from "../components/global/Footer.astro";
 import Logo from "../components/global/Logo.astro";
 import { Image } from "@astrojs/image/components";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
@@ -41,7 +41,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
     />
   </head>
 
-  <body data-nav="false" class="m-0 bg-black font-Inter text-slate-700">
+  <body data-nav="false" class="m-0 font-Inter text-slate-700">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-59JLRZ4JB2"
     ></script>
@@ -55,146 +55,110 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
       gtag("config", "G-59JLRZ4JB2");
     </script>
 
-    <div
-      class="absolute top-0 left-0 z-20 flex items-center justify-start gap-3 py-2 px-5 transition-all duration-500 ease-in-out"
-    >
-      <a href="/#home" class="shrink-0">
-        <Logo text="Charaf" />
-      </a>
-    </div>
+    <Header />
+
     <main
       role="main"
-      class="relative z-[2] m-0 transform bg-white bg-cover bg-center transition-all duration-500 ease-in-out"
+      class="relative z-[2] m-0 transform bg-white bg-cover bg-center px-5 transition-all duration-500 ease-in-out"
     >
-      <div class="container flex w-full flex-row items-center scroll-smooth">
-        <div
-          id="page-wrapper"
-          class="h-[var(--page-height)] min-h-[-webkit-fill-available] w-full overflow-scroll scroll-smooth px-5 pb-32 text-base lg:pt-20"
+      <section class="flex w-full shrink-0 flex-col lg:flex-row lg:gap-40">
+        <h1
+          class="mt-40 text-4xl font-bold tracking-tighter text-black lg:mt-32 lg:text-8xl"
         >
-          <div class="min-h-screen w-full lg:col-span-3">
-            <section
-              class="flex w-full shrink-0 flex-col lg:flex-row lg:gap-40"
-            >
-              <h1
-                class="mt-20 max-w-xl text-4xl font-bold tracking-tighter text-black lg:text-8xl"
-              >
-                Blog
-              </h1>
-              <div
-                class="mt-8 mb-32 space-y-12 text-base text-zinc-800 lg:col-span-3 lg:mt-24 lg:pr-72"
-              >
-                {
-                  posts.map((post) => (
-                    <>
-                      <article class="md:grid md:grid-cols-4 md:items-baseline">
-                        <>
-                          <div class="group relative flex flex-col items-start md:col-span-3">
-                            <>
-                              <a rel="prefetch" href={post.url}>
-                                <h2 class="mt-0 text-2xl font-semibold tracking-tight text-black">
-                                  {post.frontmatter.title}:
-                                </h2>
-                              </a>
-                              {post.frontmatter.heroImage && (
-                                <Image
-                                  src={import(
-                                    `../assets/images/hero/${post.frontmatter.heroImage}.png`
-                                  )}
-                                  alt={post.frontmatter.title}
-                                  class="relative z-10 mb-5 h-64 w-full rounded-lg object-cover shadow-lg"
-                                />
-                              )}
-                            </>
+          Blog
+        </h1>
+        <div
+          class="mt-8 mb-32 space-y-12 text-base text-zinc-800 lg:col-span-3 lg:mt-32"
+        >
+          {
+            posts.map((post) => (
+              <>
+                <article class="md:grid md:grid-cols-4 md:items-baseline md:gap-12">
+                  <>
+                    <div class="group relative flex flex-col items-start hover:cursor-pointer md:col-span-3">
+                      <>
+                        <a rel="prefetch" href={post.url}>
+                          <h2 class="mt-0 text-2xl font-semibold tracking-tight text-black">
+                            {post.frontmatter.title}:
+                          </h2>
+                        </a>
+                        {post.frontmatter.heroImage && (
+                          <Image
+                            src={import(
+                              `../assets/images/hero/${post.frontmatter.heroImage}.png`
+                            )}
+                            alt={post.frontmatter.title}
+                            class="relative z-10 mb-5 h-64 w-full rounded-lg object-cover shadow-lg"
+                          />
+                        )}
+                      </>
 
-                            <>
-                              <p class="relative z-10 mt-2 mb-2 text-xl text-slate-600">
-                                {post.frontmatter.description}
-                              </p>
-                              <a href={post.url}>
-                                <div
-                                  aria-hidden="true"
-                                  class="relative z-10 mt-4 flex items-center text-sm font-medium text-black transition group-hover:text-orange-400"
-                                >
-                                  Read article
-                                  <svg
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                    aria-hidden="true"
-                                    class="order-last ml-1 h-4 w-4 stroke-current transition group-hover:translate-x-6"
-                                  >
-                                    <path
-                                      d="M6.75 5.75 9.25 8l-2.5 2.25"
-                                      stroke-width="1.5"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                    />
-                                  </svg>
-                                </div>
-                              </a>
-                            </>
-                          </div>
-                          <time
-                            class="relative z-10 order-first mt-1 mb-3 flex items-center text-base text-zinc-500 dark:text-zinc-400 md:block"
-                            datetime={post.frontmatter.pubDate}
+                      <>
+                        <p class="relative z-10 mt-2 mb-2 text-xl text-slate-600">
+                          {post.frontmatter.description}
+                        </p>
+                        <a href={post.url}>
+                          <div
+                            aria-hidden="true"
+                            class="relative z-10 mt-4 flex items-center text-sm font-medium text-black transition group-hover:text-orange-400"
                           >
-                            {new Date(
-                              post.frontmatter.pubDate
-                            ).toLocaleDateString("en-us", {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                            })}
-                          </time>
-                        </>
-                      </article>
-                    </>
-                  ))
-                }
-              </div>
-            </section>
-          </div>
+                            Read article
+                            <svg
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              aria-hidden="true"
+                              class="order-last ml-1 h-4 w-4 stroke-current transition group-hover:translate-x-6"
+                            >
+                              <path
+                                d="M6.75 5.75 9.25 8l-2.5 2.25"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                          </div>
+                        </a>
+                      </>
+                    </div>
+                    <time
+                      class="relative z-10 order-first mt-1 mb-3 flex items-center text-base text-zinc-500 dark:text-zinc-400 md:block md:text-right"
+                      datetime={post.frontmatter.pubDate}
+                    >
+                      {new Date(post.frontmatter.pubDate).toLocaleDateString(
+                        "en-us",
+                        {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        }
+                      )}
+                    </time>
+                  </>
+                </article>
+              </>
+            ))
+          }
         </div>
-      </div>
+      </section>
     </main>
-    <Footer />
-    <style is:inline>
-      nav {
-        height: 40vh !important;
-      }
-    </style>
-
-    <script is:inline>
-      document
-        .getElementById("nav-toggle")
-        .addEventListener("click", toggleNav);
-
-      document.querySelectorAll("a.nav-link").forEach((link) => {
-        link.addEventListener("click", toggleNav);
-      });
-
-      function toggleNav() {
-        document.body.dataset.nav =
-          document.body.dataset.nav === "true" ? "false" : "true";
-      }
-    </script>
 
     <style>
-      ul {
+      main ul {
         list-style-type: none;
         padding: unset;
       }
-      ul li {
+      main ul li {
         display: flex;
       }
-      a {
+      main a {
         color: #000;
       }
-      ul li time {
+      main ul li time {
         flex: 0 0 130px;
         font-style: italic;
         color: #595959;
       }
-      ul li a:visited {
+      main ul li a:visited {
         color: rgb(246, 120, 56);
       }
     </style>

@@ -6,9 +6,7 @@ import HorizontalPageLayout from "../../layouts/HorizontalPageLayout.astro";
   id={"skills"}
   class="bg-gradient-to-b from-blue-500 to-blue-600"
 >
-  <div
-    class="component-hidden skills-card flex max-h-full max-w-3xl flex-col justify-center"
-  >
+  <div class="skills-card flex max-h-full max-w-3xl flex-col justify-center">
     <div class="tools">
       <div class="circle">
         <span class="red box"></span>
@@ -40,6 +38,7 @@ import HorizontalPageLayout from "../../layouts/HorizontalPageLayout.astro";
 
 <style>
   .skills-card {
+    position: relative;
     width: fit-content;
     height: fit-content;
     margin: 0 auto;

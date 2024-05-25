@@ -26,7 +26,6 @@
     "@types/react-dom": "^18.0.10",
     "@types/three": "^0.149.0",
     "astro": "^2.0.12",
-    "astro-compress": "^1.1.33",
     "astro-robots-txt": "^0.4.0",
     "astro-seo": "^0.7.0",
     "react": "^18.2.0",

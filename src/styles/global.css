@@ -41,12 +41,20 @@ p {
   @apply mb-5 text-left text-base text-slate-800;
 }
 
+nav a {
+  @apply  text-slate-700 text-lg;
+}
+
+nav a:hover {
+  @apply text-orange-500;
+}
+
 a {
   @apply text-left text-orange-500;
 }
 
 .component-hidden {
-  @apply translate-x-full opacity-0 blur-sm transition-all duration-500 motion-reduce:transition-none;
+  @apply translate-x-full opacity-0 blur-sm transition-all duration-300 motion-reduce:transition-none;
 }
 
 .show {
